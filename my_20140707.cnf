@@ -1,0 +1,60 @@
+[client]
+port				=3356
+socket				=/tmp/mysql_5617.sock
+
+[mysql]
+no-beep
+port				=3356
+no-auto-rehash
+compress
+show-warnings
+prompt				= \R:\m \d>\_
+
+[mysqld]
+port				=3356
+socket				=/tmp/mysql_5617.sock
+#basedir			=/usr/local/mysql
+datadir				=/opt/mysql/5617/data
+default-storage-engine		=INNODB
+sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=khollman_5617.log
+slow-query-log			=1
+slow_query_log_file		=khollman_5617-slow.log
+long_query_time			=10
+log-error			=khollman_5617.err
+max_connections			=100
+query_cache_type		=0
+query_cache_size		=0
+innodb_file_per_table		=1
+innodb_log_buffer_size		=4M
+innodb_buffer_pool_size		=75M
+innodb_log_file_size		=10M
+innodb_flush_log_at_trx_commit	=2
+innodb_data_home_dir		=/opt/mysql/5617/data
+innodb_data_file_path		=ibdata1:10M;ibdata2:10M:autoextend
+# MEM QUAN update:
+init_file			=/home/mysql/mem_quan_update.sql
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+sync_binlog			=1
+sync_master_info		=1
+slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3356
+log-bin				=khollman_5617
+binlog_format			=ROW
+report-host			=khollman
+#replicate-do-db		=nexus
+

@@ -1,0 +1,99 @@
+###########
+# install
+sudo yum install -y python numactl ncurses-compat-libs
+sudo yum install -y mysql-commercial-*8.0.13*rpm mysql-router-commercial-8.0.12-1.1.el7.x86_64.rpm mysql-shell-commercial-8.0.12-1.1.el7.x86_64.rpm
+sudo yum install -y mysql-commercial-common mysql-commercial-libs mysql-commercial-libs-compat mysql-commercial-client mysql-commercial-server mysql-commercial-backup
+
+
+sudo systemctl start mysqld.service
+sudo systemctl enable mysqld.service
+
+###########
+# remove:
+sudo -i
+systemctl stop mysqld.service
+rm -rf /etc/my.cnf
+rm -rf /var/lib/mysql/*
+rm -rf /var/log/mysqld.log
+rm -rf /opt/mysql/*
+sudo yum remove -y mysql-shell mysql-commercial-common mysql-commercial-libs mysql-commercial-client mysql-commercial-server mysql-router-commercial mysql-community-common  mysql-community-libs mysql-community-libs-compat  mysql-community-client  mysql-community-server mysql-router
+
+# Ubuntu:
+sudo apt install libtinfo5 libaio1
+
+ groupadd mysql
+ useradd -r -g mysql mysql
+ cd /usr/local
+ tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+ ln -s full-path-to-mysql-VERSION-OS mysql
+ cd mysql
+# version >5.7.6
+ mkdir mysql-files
+ chmod 770 mysql-files
+ chown -R mysql .
+ chgrp -R mysql .
+# version > 5.7.5
+ bin/mysqld --datadir=/opt/mysql/data --initialize --user=mysql
+ bin/mysqld --datadir=/opt/mysql/data --initialize-insecure --user=mysql
+ 
+# version = 5.7.5
+ bin/mysql_install_db --user=mysql --datadir=/opt/mysql/575/data --basedir=/usr/local/mysql --defaults-file=/usr/local/mysql/my.cnf
+# versions < 5.7.5
+ scripts/mysql_install_db --defaults-file=/etc/my.cnf --user=mysql --datadir=/opt/mysql/mysql/data --basedir=/usr/local/mysql
+	./bin/mysqld_safe
+	./bin/mysqladmin -u root password 'oracle'
+ chown -R root .
+ chown -R mysql data
+# Next command is optional
+ cp support-files/my-medium.cnf /etc/my.cnf
+ bin/mysqld_safe --user=mysql &
+
+ sudo grep 'A temporary password is generated for' /opt/mysql/5718/data/kh-X20W-D_5718.err  |tail -1
+
+
+
+# Next command is optional
+ cp support-files/mysql.server /etc/init.d/mysql.server
+
+my.cnf:
+[client]
+#password	= your_password
+port		= 3306
+socket		= /tmp/mysql.sock
+[mysqld]
+user		= mysql
+datadir		= /opt/mysql/mysql/data
+port		= 3306
+socket		= /tmp/mysql.sock
+skip-external-locking
+key_buffer_size = 10M
+max_allowed_packet = 1M
+table_open_cache = 64
+sort_buffer_size = 512K
+net_buffer_length = 8K
+read_buffer_size = 256K
+read_rnd_buffer_size = 512K
+myisam_sort_buffer_size = 8M
+general_log
+log_output='TABLE,FILE'
+slow_query_log
+max_connections = 50
+innodb_file_per_table
+innodb_data_home_dir=/opt/mysql/mysql/data
+innodb_data_file_path=ibdata1:18M;ibdata2:10M:autoextend
+server-id	= 1
+# log-bin=/binlogs/mysql-bin
+# expire_logs_days=3
+# binlog_format=row
+[mysqldump]
+quick
+max_allowed_packet = 16M
+[mysql]
+no-auto-rehash
+[myisamchk]
+key_buffer_size = 20M
+sort_buffer_size = 20M
+read_buffer = 2M
+write_buffer = 2M
+[mysqlhotcopy]
+interactive-timeout

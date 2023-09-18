@@ -1,0 +1,74 @@
+[client]
+port				=3301
+socket				=/opt/mysql/5714GR/mysql_5714GR.sock
+
+[mysql]
+no-beep
+port				=3301
+no-auto-rehash
+compress
+show-warnings
+#prompt                          = \R:\m \d>\_
+prompt                          ='server1> ' 
+user                            =root
+password                        =oracle
+
+[mysqld_safe]
+log-error			=/opt/mysql/5714GR/mysqld_5714GR.log
+
+[mysqld]
+user				=mysql
+port				=3301
+basedir				=/usr/local/mysql-advanced-5.7.14-linux-glibc2.5-x86_64
+datadir				=/opt/mysql/5714GR/data
+lc_messages_dir			=/usr/local/mysql-advanced-5.7.14-linux-glibc2.5-x86_64/share
+socket				=/opt/mysql/5714GR/mysql_5714GR.sock
+default-storage-engine		=INNODB
+sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=khollman_5714GR.log
+#slow-query-log			=1
+#slow_query_log_file		=khollman_5714GR-slow.log
+#long_query_time			=10
+log-error			=khollman_5714GR.err
+max_connections			=100
+query_cache_type		=0
+query_cache_size		=0
+innodb_file_per_table		=1
+explicit_defaults_for_timestamp	=1
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+relay-log			=5714GR_relay
+innodb_flush_log_at_trx_commit	=1
+sync_binlog			=1
+sync_master_info		=1
+#slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3301
+log-bin				=5714GR
+binlog_format			=ROW
+report-host			=127.0.0.1
+#replicate-do-db			=nexus
+# Group Replication requirement:
+transaction-write-set-extraction=MURMUR32
+binlog-checksum			=NONE
+plugin-dir			=lib/plugin
+plugin-load			=group_replication.so
+group_replication_group_name	=8a94f357-aab4-11df-86ab-c80aa9429562
+group_replication_local_address	=127.0.0.1:10301
+group_replication_peer_addresses=127.0.0.1:10301,127.0.0.1:10302,127.0.0.1:10303
+group_replication_recovery_retry_count= 2
+group_replication_recovery_reconnect_interval= 120
+group_replication_start_on_boot	=1
+group_replication_bootstrap_group= 1

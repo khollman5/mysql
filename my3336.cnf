@@ -1,0 +1,61 @@
+[client]
+port                            =3336
+socket                          =/opt/mysql/5717/mysql3336.sock
+
+[mysql]
+no-beep
+port                            =3336
+no-auto-rehash
+compress
+show-warnings
+prompt                          = \R:\m \d>\_
+
+[mysqld]
+port                            =3336
+basedir                         =/usr/local/mysql-advanced-5.7.17-linux-glibc2.5-x86_64
+datadir                         =/opt/mysql/5717/3336/data
+socket				=/opt/mysql/5717/mysql3336.sock
+default-storage-engine          =INNODB
+sql-mode                        ="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names          =1
+general-log                     =1
+general_log_file                =khollman_3336.log
+#slow-query-log                 =1
+#slow_query_log_file            =khollman_3336-slow.log
+#long_query_time                        =10
+log-error                       =khollman_3336.err
+max_connections                 =100
+query_cache_type                =0
+query_cache_size                =0
+innodb_file_per_table           =1
+explicit_defaults_for_timestamp	=1
+
+# Replication Framework
+server-id                       =3336
+gtid_mode			=ON
+report-port                     =3336
+report-host                     =khollman-es
+enforce_gtid_consistency	=ON
+master_info_repository		=TABLE
+relay_log_info_repository	=TABLE
+binlog_checksum			=NONE
+log_slave_updates		=ON
+log-bin                         =khollman_3336
+binlog_format                   =ROW
+binlog-row-image 		=MINIMAL
+binlog-rows-query-log-events 	=ON
+log-bin-trust-function-creators =TRUE
+expire-logs-days 		=90
+max-binlog-size 		=1G
+
+# Group Replication Settings
+transaction_write_set_extraction=XXHASH64
+loose-group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+loose-group_replication_start_on_boot=off
+loose-group_replication_local_address= "127.0.0.1:24903"
+loose-group_replication_group_seeds= "127.0.0.1:24901,127.0.0.1:24902,127.0.0.1:24903"
+loose-group_replication_bootstrap_group= off
+# Multi-Primary mode activation
+loose-group_replication_single_primary_mode=FALSE
+loose-group_replication_enforce_update_everywhere_checks=TRUE
+

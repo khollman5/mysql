@@ -1,0 +1,58 @@
+[client]
+user				=root
+password			=Oracle20!8
+port				=3380
+socket				=/opt/mysql/8021/mysql_8021.sock
+
+[mysql]
+no-beep
+port				=3380
+no-auto-rehash
+compress
+show-warnings
+prompt                          = \R:\m \d>\_
+
+[mysqld_safe]
+#log-error			=/opt/mysql/8021/mysqld_8021.log
+
+[mysqld]
+#user				=mysql
+port				=3380
+basedir			=/usr/local/mysql/mysql-commercial-8.0.21-linux-glibc2.12-x86_64
+lc_messages_dir		=/usr/local/mysql/mysql-commercial-8.0.21-linux-glibc2.12-x86_64/share
+datadir			=/opt/mysql/8021/data
+socket				=/opt/mysql/8021/mysql_8021.sock
+log-error			=/opt/mysql/8021/mysqld_8021.log
+default-storage-engine		=INNODB
+general-log			=1
+general_log_file		=kh-X30-F_8021.log
+#slow-query-log			=1
+#slow_query_log_file		=kh-X30-F_8021-slow.log
+#long_query_time			=10
+max_connections			=100
+innodb_file_per_table		=1
+innodb_dedicated_server 	=ON
+innodb_flush_log_at_trx_commit	=1
+authentication_policy		='mysql_native_password'
+innodb_log_files_in_group	= 4
+
+# Replication
+server-id			=8021
+log-replica-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+source-info-repository		=TABLE
+#relay-log-info-repository	=TABLE
+sync_binlog			=1
+sync_source_info		=1
+replica-parallel-workers		=2
+replica_transaction_retries	=0
+binlog-checksum			=CRC32
+source-verify-checksum		=1
+replica-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3380
+log-bin				=kh-X30-F_8021
+binlog_format			=ROW
+report-host			=kh-X30-F-es
+

@@ -1,0 +1,63 @@
+[client]
+socket				=/opt/mysql/5630/mysql.socket
+port				=3356
+
+[mysql]
+no-beep
+port				=3356
+no-auto-rehash
+compress
+show-warnings
+prompt				= \R:\m \d>\_
+
+[mysqld_safe]
+log-error                       =/opt/mysql/5630/mysqld_5630.log
+
+[mysqld]
+user                            =mysql
+port				=3356
+#basedir			=/usr/local/mysql
+datadir				=/opt/mysql/5630/data
+socket				=/opt/mysql/5630/mysql.socket
+lc_messages_dir			=/usr/local/mysql-advanced-5.6.30-linux-glibc2.5-x86_64/share
+default-storage-engine		=INNODB
+sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=khollman_5630.log
+slow-query-log			=1
+slow_query_log_file		=khollman_5630-slow.log
+long_query_time			=10
+log-error			=khollman_5630.err
+max_connections			=100
+query_cache_type		=0
+query_cache_size		=0
+innodb_file_per_table		=1
+innodb_log_buffer_size		=4M
+innodb_buffer_pool_size		=75M
+innodb_log_file_size		=10M
+innodb_flush_log_at_trx_commit	=2
+innodb_data_home_dir		=/opt/mysql/5630/data
+innodb_data_file_path		=ibdata1:10M;ibdata2:10M:autoextend
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+sync_binlog			=1
+sync_master_info		=1
+slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3356
+log-bin				=khollman_5630
+binlog_format			=ROW
+report-host			=khollman
+#replicate-do-db		=nexus
+

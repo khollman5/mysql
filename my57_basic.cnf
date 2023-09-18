@@ -1,0 +1,64 @@
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html
+[client]
+user=root
+password=Oracle20!8
+socket				=/opt/mysql/5718/mysql.sock
+port				=3357
+
+[mysql]
+no-beep
+socket				=/opt/mysql/5718/mysql.sock
+port				=3357
+no-auto-rehash
+compress
+show-warnings
+prompt                          = \R:\m \d>\_
+
+[mysqld]
+socket				=/opt/mysql/5718/mysql.sock
+port				=3357
+basedir				=/usr/local/mysql/mysql-advanced-5.7.18-linux-glibc2.5-x86_64
+datadir 			=/opt/mysql/5718/data
+default-storage-engine		=INNODB
+sql_mode			=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=5718.log
+#slow-query-log			=1
+#slow_query_log_file		=5718-slow.log
+#long_query_time		=10
+log-error			=/opt/mysql/5718/5718.err
+max_connections			=100
+query_cache_type		=0
+query_cache_size		=0
+innodb_file_per_table		=1
+
+# Replication
+server-id			=10
+log-slave-updates		=TRUE
+#gtid-mode			=ON
+log-bin				=5718
+binlog_format			=ROW
+relay-log-info-repository	=TABLE
+innodb_flush_log_at_trx_commit	=1
+sync_binlog			=1
+report-port			=3357
+report-host			=kh-X30-F
+replicate-do-db			=nexus
+
+# http://mysqlhighavailability.com/mysql-group-replication-a-quick-start-guide/
+# replication and binlog related options
+binlog-row-image = MINIMAL
+binlog-rows-query-log-events = ON
+log-bin-trust-function-creators = TRUE
+expire-logs-days = 90
+max-binlog-size = 1G
+relay-log-recovery = ON
+slave-parallel-type = LOGICAL_CLOCK
+slave-preserve-commit-order = ON
+slave-rows-search-algorithms = 'INDEX_SCAN,HASH_SCAN'
+slave-type-conversions = ALL_NON_LOSSY
+sync-master-info = 1000
+sync-relay-log = 1000
+

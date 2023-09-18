@@ -1,0 +1,50 @@
+[client]
+socket					= /tmp/mysql.sock
+[mysql]
+prompt					= \R:\m \d>\_
+[mysqld]
+user						= mysql
+datadir					= /opt/mysql/mysql/data
+port						= 3306
+socket					= /tmp/mysql.sock
+#sql_mode					= NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+# Replication
+#expire_logs_days			=3
+binlog_format				=ROW
+log-slave-updates			=true
+gtid-mode					=ON
+#disable-gtid-unsafe-statements	=ON       # pre-v5.6.9
+enforce-gtid-consistency		=true
+master-info-repository		=TABLE
+relay-log-info-repository		=TABLE
+relay_log_recovery			=1
+#relay-log					=ol63uek01-relay-bin.log
+#relay-log-index			=ol63uek01-relay-bin-index.log
+#sync_binlog				=0	# Group Commit
+#sync-master-info			=1
+slave-parallel-workers		=2
+binlog-checksum				=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum		=1
+binlog-rows-query-log-events	=1
+server-id					=2
+report-port				=3306
+log-bin					=olinux63-bin.log
+report-host				=olinux63_uek
+# Replication specifics
+replicate-do-db				=sakila
+#
+character-set-server			=utf8
+general-log				=1
+log-output					=FILE
+log-error					=olinux63_uek.err
+slow-query-log				=1
+max_connections				=20
+query_cache_type			=0
+innodb_log_buffer_size		=4M
+innodb_buffer_pool_size		=75M
+innodb_log_file_size			=10M
+innodb_flush_log_at_trx_commit	=2
+innodb_file_per_table			=1
+innodb_data_home_dir			=/opt/mysql/mysql/data
+innodb_data_file_path			=ibdata1:10M;ibdata2:10M:autoextend

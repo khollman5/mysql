@@ -1,0 +1,62 @@
+[client]
+port				=3357
+socket				=/opt/mysql/5714/mysql_5714.sock
+
+[mysql]
+no-beep
+port				=3357
+no-auto-rehash
+compress
+show-warnings
+prompt                          = \R:\m \d>\_
+
+[mysqld_safe]
+log-error			=/opt/mysql/5714/mysqld_5714.log
+
+[mysqld]
+user                            =mysql
+port				=3357
+basedir				=/usr/local/mysql-advanced-5.7.14-linux-glibc2.5-x86_64
+datadir				=/opt/mysql/5714/data
+socket				=/opt/mysql/5714/mysql_5714.sock
+default-storage-engine		=INNODB
+sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=khollman_5714.log
+#slow-query-log			=1
+#slow_query_log_file		=khollman_5714-slow.log
+#long_query_time			=10
+log-error			=khollman_5714.err
+max_connections			=100
+query_cache_type		=0
+query_cache_size		=0
+innodb_file_per_table		=1
+explicit_defaults_for_timestamp	=1
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+innodb_flush_log_at_trx_commit	=1
+sync_binlog			=1
+sync_master_info		=1
+slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3357
+log-bin				=khollman_5714
+binlog_format			=ROW
+report-host			=khollman-es
+#replicate-do-db			=nexus
+# Group Replication requirement:
+transaction-write-set-extraction=MURMUR32
+binlog-checksum			=NONE
+plugin-dir			=lib/plugin
+plugin-load			=group_replication.so

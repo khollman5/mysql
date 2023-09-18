@@ -1,0 +1,20 @@
+[client]
+user            = root
+port            = 3345
+socket          = /opt/mysql/4118_57/data/mysql.sock
+
+[mysqld]
+basedir         = /usr/local/mysql-advanced-5.7.14-linux-glibc2.5-x86_64
+datadir         = /opt/mysql/4118_57/data
+user            = mysql
+port            = 3345
+socket          = /opt/mysql/4118_57/data/mysql.sock
+log-error	= 4118_57.err
+innodb_data_home_dir = /opt/mysql/4118_57/data
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_log_group_home_dir = /opt/mysql/4118_57/data
+innodb_log_file_size = 5M
+innodb_log_files_in_group = 2
+#innodb_file_format = Antelope
+innodb_page_size = 16K
+innodb_file_per_table=ON

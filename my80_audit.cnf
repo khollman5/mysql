@@ -1,0 +1,69 @@
+[client]
+user				=root
+password			=Oracle20!8
+socket				=/opt/mysql/8018/mysql.socket
+port				=3380
+
+[mysql]
+no-beep
+port				=3380
+no-auto-rehash
+compress
+show-warnings
+prompt				= \R:\m \d>\_
+
+[mysqld_safe]
+log-error                       =/opt/mysql/8018/mysqld_8018.log
+
+[mysqld]
+#user                            =mysql
+port				=3380
+#basedir			=/usr/local/mysql
+datadir				=/opt/mysql/8018/data
+socket				=/opt/mysql/8018/mysql.socket
+#lc_messages_dir			=/usr/local/mysql/mysql-commercial-8.0.12-linux-glibc2.12-x86_64/share
+lc_messages_dir			=/usr/local/mysql/mysql-commercial-8.0.18-linux-x86_64-minimal/share
+default-storage-engine		=INNODB
+#sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+lower_case_table_names		=1
+general-log			=1
+general_log_file		=khollman_8018.log
+slow-query-log			=1
+slow_query_log_file		=khollman_8018-slow.log
+long_query_time			=10
+log-error			=khollman_8018.err
+max_connections			=100
+#query_cache_type		=0
+#query_cache_size		=0
+innodb_file_per_table		=1
+innodb_log_buffer_size		=4M
+innodb_buffer_pool_size		=75M
+innodb_log_file_size		=10M
+innodb_flush_log_at_trx_commit	=2
+innodb_data_home_dir		=/opt/mysql/8018/data
+innodb_data_file_path		=ibdata1:10M;ibdata2:10M:autoextend
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+sync_binlog			=1
+sync_master_info		=1
+slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3380
+log-bin				=khollman_8018
+binlog_format			=ROW
+report-host			=khollman
+#replicate-do-db		=nexus
+
+default_authentication_plugin='mysql_native_password'
+performance_schema_consumer_events_statements_history_long = ON
+#audit-log=FORCE_PLUS_PERMANENT

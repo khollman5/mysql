@@ -1,0 +1,59 @@
+[client]
+port				=3307
+socket				=/opt/mysql/8011/mysql_8011.sock
+
+[mysql]
+no-beep
+port				=3307
+no-auto-rehash
+compress
+show-warnings
+prompt                          = \R:\m \d>\_
+
+[mysqld_safe]
+log-error			=/opt/mysql/8011/mysqld_8011.log
+
+[mysqld]
+#user				=mysql
+port				=3307
+basedir				=/usr/local/mysql/mysql-5.7.18-linux-glibc2.5-x86_64
+lc_messages_dir			=/usr/local/mysql/mysql-5.7.18-linux-glibc2.5-x86_64/share
+datadir				=/opt/mysql/8011/data
+socket				=/opt/mysql/8011/mysql_8011.sock
+default-storage-engine		=INNODB
+sql-mode			="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+general-log			=1
+general_log_file		=kh-X20W-D_8011.log
+#slow-query-log			=1
+#slow_query_log_file		=kh-X20W-D_8011-slow.log
+#long_query_time			=10
+log-error			=kh-X20W-D_8011.err
+max_connections			=100
+#query_cache_type		=0
+#query_cache_size		=0
+innodb_file_per_table		=1
+validate_password.policy	=0
+innodb_dedicated_server 	=ON
+
+# Replication
+server-id			=1
+log-slave-updates		=TRUE
+gtid-mode			=ON
+enforce-gtid-consistency	=TRUE
+master-info-repository		=TABLE
+relay-log-info-repository	=TABLE
+innodb_flush_log_at_trx_commit	=1
+sync_binlog			=1
+sync_master_info		=1
+slave-parallel-workers		=2
+slave_transaction_retries	=0
+binlog-checksum			=CRC32
+master-verify-checksum		=1
+slave-sql-verify-checksum	=1
+binlog-rows-query-log-events	=1
+report-port			=3307
+log-bin				=kh-X20W-D_8011
+binlog_format			=ROW
+report-host			=kh-X20W-D-es
+
+lower_case_table_names		=1
