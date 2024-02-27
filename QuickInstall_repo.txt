@@ -1,0 +1,17 @@
+	Download the mysql repo binary for your env:
+yum -y localinstall ./mysql80-community-release-el8-9.noarch.rpm
+
+	On the database nodes only:
+yum install -y mysql-community-server-0:8.0.36-1.el8.x86_64
+yum install -y mysql-shell-0:8.0.36-1.el8.x86_64
+
+	On each of the database nodes:
+systemctl start mysqld
+systemctl enable mysqld
+
+pswd=`grep -oP '(?<= A temporary password is generated for root@localhost: ).*' /var/log/mysqld.log | tail -1`
+mysql -uroot -p$pswd -S /var/lib/mysql/mysql.sock
+
+ alter user 'root'@'localhost' identified by 'Contr4sen!A';
+ flush privileges;
+
